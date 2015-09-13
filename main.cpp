@@ -18,15 +18,13 @@ double minimum = -127;
 
 
 
-int main(){
-		Current_Angle = getPitch();
-	  error = getError();
-		feedback = getFeedback();
-		if(error<2 && error>-3)
-            break;
-    }
-}
 
+
+int8_t getPitch(){
+    Current_Angle += (int)feedback;
+    std::cout<<"angle "<<Current_Angle<<std::endl;
+    return Current_Angle;
+}
 
 int getError(){
 	error = 0 - Current_Angle;
@@ -42,7 +40,7 @@ int getFeedback(){
 	  std::cout<<"deriv "<<derivative<<std::endl;
 	  double proportion = error;
     std::cout<<"proportion "<<proportion<<std::endl;
-	  double feedback = K_p*proportion + K-i*integral + K-d*derivative;
+	  double feedback = K_p*proportion + K_i*integral + K_d*derivative;
 
 	std::cout<<"integral "<<integral<<std::endl;
    //     if (feedback<minimum)
@@ -55,5 +53,15 @@ int getFeedback(){
         std::cout<<""<<std::endl;
         return (int)feedback;
 
+}
+
+int main(){
+	while(true){
+	  Current_Angle = getPitch();
+	  error = getError();
+		feedback = getFeedback();
+		if(error<2 && error>-3)
+            break;
+    }
 }
 

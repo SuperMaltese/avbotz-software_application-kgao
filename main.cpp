@@ -5,7 +5,7 @@
 using std::vector;
 vector<int> errors;
 
-int Current_Angle = -45;
+int Current_Angle;
 int feedback = 0;
 int error;
 int sum_of_errors = 0;
@@ -56,6 +56,10 @@ int getFeedback(){
 }
 
 int main(){
+	
+	std::cout<<"Enter initial pitch error: "<<std::endl;
+    	std::cin>>Current_Angle;
+	
 	while(true){
 	  Current_Angle = getPitch();
 	  error = getError();
